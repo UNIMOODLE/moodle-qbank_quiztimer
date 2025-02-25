@@ -70,17 +70,22 @@ class quiztimer_column extends column_base {
         $attributes = [];
 
         if (question_has_capability_on($question, 'edit')) {
-            // Check if a POST request has been submitted.
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (isset($_POST['time']) && isset($_POST['questionId']) && $_POST['questionId'] === $question->id) {
+
+            $time = optional_param('time', null, PARAM_INT);
+            $questionId = optional_param('questionId', null, PARAM_INT);
+            $dropdownOption = optional_param('dropdown_option', null, PARAM_TEXT);
+
+            if ($time !== null && $questionId !== null ) {
+                if ($questionId == $question->id) {
                     $questionid = $DB->get_field('question_versions', 'questionbankentryid',
                     ['questionid' => $question->id], IGNORE_MISSING);
                     $existingdata = $DB->get_record('question_timer', ['questionid' => $questionid]);
                     $data = new stdClass;
+
                     $data->id = $existingdata->id;
                     $data->questionid = $questionid;
-                    $data->time = $_POST['time'];
-                    $data->unit_time = $_POST['dropdown_option'];
+                    $data->time = $time;
+                    $data->unit_time = $dropdownOption;
                     $data->modifierid = $USER->id;
                     $data->timemodified = time();
                     $DB->update_record('question_timer', $data);
@@ -110,13 +115,13 @@ class quiztimer_column extends column_base {
                 $number = $questionid;
                 $data->modifierid = $USER->id;
                 $data->timemodified = time();
-                if (isset($_POST['time'])) {
-                    $data->time = $_POST['time'];
+                if ($time !== null) {
+                    $data->time = $time;
                 } else {
                     $data->time = get_config('qbank_quiztimer', 'time'); // Default value for "time".
                 }
-                if (isset($_POST['dropdown_option'])) {
-                    $data->unit_time = $_POST['dropdown_option'];
+                if ($dropdownOption !== null) {
+                    $data->unit_time = $dropdownOption;
                 } else {
                     $data->unit_time = get_config('qbank_quiztimer', 'time_unit'); // Default value for "unit_time".
                 }
