@@ -44,3 +44,5 @@ $string['setting:unitime'] = 'Unidad de tiempo';
 $string['hours'] = 'horas';
 $string['minutes'] = 'minutos';
 $string['seconds'] = 'segundos';
+
+$string['privacy:metadata'] = 'El plugin del banco de preguntas Quiztimer no almacena ningún dato personal.';

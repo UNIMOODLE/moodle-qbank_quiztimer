@@ -31,19 +31,15 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace qbank_quiztimer\privacy;
+
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Quiz Timer';
+class provider implements \core_privacy\local\metadata\null_provider {
 
-$string['questionstatus'] = 'Time';
 
-$string['setting:title'] = 'Default time';
-$string['setting:time'] = 'Time';
-$string['setting:unitime'] = 'Unit Time';
+    public static function get_reason(): string {
+        return 'privacy:metadata';
+    }
 
-$string['hours'] = 'hours';
-$string['minutes'] = 'minutes';
-$string['seconds'] = 'seconds';
-
-$string['privacy:metadata'] = 'Quiztimer question bank plugin does not store any personal data';
-
+}
