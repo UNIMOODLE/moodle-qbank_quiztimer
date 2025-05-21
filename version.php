@@ -34,8 +34,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qbank_quiztimer';
-$plugin->release = '1.0.1';
-$plugin->version = 2024032001;
+$plugin->release = '1.0.2';
+$plugin->version = 2025052101;
 $plugin->requires = 2022041900;
 $plugin->maturity = MATURITY_STABLE;
 
